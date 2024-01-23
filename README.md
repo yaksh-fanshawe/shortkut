@@ -18,3 +18,8 @@ There is currently no platform to bridge the gap between a hair stylist and a cu
     - Allowing user to search for various locations and view it on map.
     - Allowing user to Select services.
     - Allowing user to find available slots and choosing desired slot from it.
+    - Allowing user to register or create an account on App	
+    - Allowing user to login on App			
+    - Allowing user to logout			
+    - Allowing user to reset password			
+    - Allowing user to view, enter and modify details in profile
