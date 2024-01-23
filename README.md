@@ -23,3 +23,7 @@ There is currently no platform to bridge the gap between a hair stylist and a cu
     - Allowing user to search for various locations and view it on map.
     - Allowing user to Select services.
     - Allowing user to find available slots and choosing desired slot from it.
+    - Allowing user to confirm the order and submit it from app		
+    - Allowing user to view their past orders and current orders		
+    - Allowing user to set reminders about their upcoming appointments		
+    - Allowing user to review after having service
