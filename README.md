@@ -5,6 +5,7 @@ INFO6134 Capstone Project : shortKut
 
 ## Group Members ##
     - Yaksh Jethva 
+    - Vinay Soni
 
 ### App name: shortKut ###
 
