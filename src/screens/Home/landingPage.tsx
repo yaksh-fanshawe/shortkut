@@ -24,10 +24,19 @@ const LandingPage = ({ navigation }) => {
     "Nails",
   ];
 
-  const searchService = function (text: string): string[] {
-    if (text == "") {
-      console.log("no text");
-      return list;
+    const list: string[] = ["Braids", "Natural Hair", "Hiarcut", "Men's Haircut", "Locs", "Silk Press", "Weaves", "Eyelashes", "Nails"]
+    
+    const searchService = function (text: string): string[] {
+        if(text == ""){
+            return list
+        }
+        var newList: string[] = []
+        list.forEach((service) => {
+            if(service.toLowerCase().includes(text.toLowerCase())){
+                newList.push(service)
+            }
+        })
+        return newList
     }
     var newList: string[] = [];
     list.forEach((service) => {
