@@ -1,6 +1,7 @@
 const Screen = {
-    LandingScreen: 'LandingScreen'
-  }
-  
-  export default Screen
-  
+  LandingScreen: "LandingScreen",
+  SearchScreen: "SearchScreen",
+  BusinessProfileScreen: "BusinessProfileScreen",
+};
+
+export default Screen;

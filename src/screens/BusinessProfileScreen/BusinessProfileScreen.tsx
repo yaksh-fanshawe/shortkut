@@ -26,7 +26,8 @@ const defaultRegion = {
 //   longitude: -81.1935947
 // }
 
-const BusinessProfileScreen = ({ shop }) => {
+const BusinessProfileScreen = (props) => {
+  const { shop } = props.route.params;
   const [location, setLocation] = useState({
     latitude: 43.0000004,
     longitude: -81.1935947,
