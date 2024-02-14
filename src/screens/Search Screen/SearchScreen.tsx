@@ -28,7 +28,7 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ selectedService }) => {
   }
 
   const onPressShop = (item) => {
-    // navigate to selected service
+    // navigate to selected servic
   }
 
   return (
