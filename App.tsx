@@ -1,12 +1,11 @@
-import { View, Text } from 'react-native'
 import React from 'react'
-import SearchScreen from './src/screens/Search Screen/SearchScreen'
-
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+import Route from './src/navigation/Route'
 const App = () => {
   return (
-    <View style={{flex:1}}>
-      <SearchScreen />
-    </View>
+    <SafeAreaProvider>
+      <Route />
+    </SafeAreaProvider>
   )
 }
 
