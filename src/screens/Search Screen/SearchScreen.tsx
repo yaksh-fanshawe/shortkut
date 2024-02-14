@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import { AppHeader, AppTextInput } from "../../components";
-import { Color } from "../../utils";
+import { Color, Screen } from "../../utils";
 import { getLocationResults } from "../../utils/Data";
 
 const list = [
@@ -16,7 +16,9 @@ interface SearchScreenProps {
   selectedService: string;
 }
 
-const SearchScreen: React.FC<SearchScreenProps> = ({ selectedService }) => {
+const SearchScreen: React.FC<SearchScreenProps> = (props) => {
+  const {selectedService} = props.route.params
+  const {navigation} = props
   const [location, setLocation] = useState("");
   const [shopList, setShopList] = useState([])
 
@@ -29,6 +31,7 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ selectedService }) => {
 
   const onPressShop = (item) => {
     // navigate to selected service
+    navigation.navigate(Screen.BusinessProfileScreen, {shop: item})
   }
 
   return (
@@ -50,7 +53,7 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ selectedService }) => {
           style={{ width: "100%" }}
           renderItem={({ item, index }) => {
             return (
-              <TouchableOpacity style={styles.listItem}>
+              <TouchableOpacity style={styles.listItem} onPress={() => onPressShop(item)}>
                 <Text style={styles.listItemText}>{item.businessName}</Text>
                 <Text >{`${item?.city}, ${item?.province}`}</Text>
               </TouchableOpacity>
