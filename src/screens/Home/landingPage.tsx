@@ -12,7 +12,6 @@ const LandingPage = () => {
     
     const searchService = function (text: string): string[] {
         if(text == ""){
-            console.log("no text")
             return list
         }
         var newList: string[] = []
