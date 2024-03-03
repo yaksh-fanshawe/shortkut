@@ -1,3 +1,4 @@
+// Library Imports
 import {
   View,
   Text,
@@ -5,47 +6,55 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
+import * as _ from "lodash";
+// Component Imports
 import { AppTextInput, AppHeader } from "../../components";
 import { Color, Screen } from "../../utils";
 
-const LandingPage = ({ navigation }) => {
-  const [search, setSearchChange] = React.useState("");
+// Constants
+const list: string[] = [
+  "Braids",
+  "Natural Hair",
+  "Haircut",
+  "Men's Haircut",
+  "Locs",
+  "Silk Press",
+  "Weaves",
+  "Eyelashes",
+  "Nails",
+];
 
-  const list: string[] = [
-    "Braids",
-    "Natural Hair",
-    "Haircut",
-    "Men's Haircut",
-    "Locs",
-    "Silk Press",
-    "Weaves",
-    "Eyelashes",
-    "Nails",
-  ];
+// Interface
+interface LandingPageProps {
+  navigation: any;
+}
 
-  const searchService = function (text: string): string[] {
+// Component
+const LandingPage: React.FC<LandingPageProps> = ({ navigation }) => {
+  const [search, setSearchChange] = useState("");
+
+  const searchService = (text: string): string[] => {
     if (text == "") {
       return list;
     }
-    var newList: string[] = [];
-    list.forEach((service) => {
-      if (service.toLowerCase().includes(text.toLowerCase())) {
+    let newList: string[] = [];
+    _.forEach(list, (service) => {
+      if (_.includes(_.toLower(service), _.toLower(text))) {
         newList.push(service);
       }
     });
     return newList;
   };
 
-  const onTap = (item) => {
-    console.log("implement your code here");
+  const onTap = (item: string) => {
     navigation.navigate(Screen.SearchScreen, { selectedService: item });
   };
 
   return (
     <View>
       <AppHeader />
-      <View style={{ paddingHorizontal: 15, paddingVertical: 12 }}>
+      <View style={styles.mainView}>
         <AppTextInput
           value={search}
           placeholder={"Search"}
@@ -54,11 +63,11 @@ const LandingPage = ({ navigation }) => {
         />
         <FlatList
           data={searchService(search)}
-          keyExtractor={(item) => item}
-          renderItem={({ item, index }) => {
+          keyExtractor={(item) => `searchServiceItem-${item}`}
+          renderItem={({ item }) => {
             return (
-              <TouchableOpacity style={style.card} onPress={() => onTap(item)}>
-                <Text style={style.cardTitlt}>{item}</Text>
+              <TouchableOpacity style={styles.card} onPress={() => onTap(item)}>
+                <Text style={styles.cardTitle}>{item}</Text>
               </TouchableOpacity>
             );
           }}
@@ -70,7 +79,13 @@ const LandingPage = ({ navigation }) => {
 
 export default LandingPage;
 
-const style = StyleSheet.create({
+// Default Props
+LandingPage.defaultProps = {
+  navigation: null,
+};
+
+// Styles
+const styles = StyleSheet.create({
   card: {
     width: "100%",
     paddingHorizontal: 20,
@@ -79,9 +94,13 @@ const style = StyleSheet.create({
     marginVertical: 5,
     borderRadius: 8,
   },
-  cardTitlt: {
+  cardTitle: {
     fontSize: 16,
     fontWeight: "500",
     color: Color.regularText,
+  },
+  mainView: {
+    paddingHorizontal: 15,
+    paddingVertical: 12,
   },
 });

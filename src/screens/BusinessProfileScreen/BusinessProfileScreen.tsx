@@ -1,23 +1,25 @@
+// Library Imports
 import {
   View,
   Text,
-  Image,
   ScrollView,
   StyleSheet,
   FlatList,
   TouchableOpacity,
 } from "react-native";
 import React, { useState } from "react";
+import MapView, { LatLng, Marker } from "react-native-maps";
+// Component Imports
 import { Color, Responsive } from "../../utils";
 import { AppHeader, AppContainer, AppButton } from "../../components";
-import MapView, { LatLng, Marker } from "react-native-maps";
 
+// Constants
 const photoURL = "https://i.ibb.co/4TQ1DCn/m1.png";
 // const businessName = 'London Barber Huts'
 // const businessAddress = '1560 Dundas St, London, ON'
 const defaultRegion = {
-  latitude: 43.0000004,
-  longitude: -81.1935947,
+  latitude: 42.9927566,
+  longitude: -81.2649877,
   latitudeDelta: 0.0075,
   longitudeDelta: 0.0075,
 };
@@ -26,11 +28,19 @@ const defaultRegion = {
 //   longitude: -81.1935947
 // }
 
-const BusinessProfileScreen = (props) => {
+// Interface
+interface BusinessProfileScreenProps {
+  route: any;
+  navigation: any;
+}
+
+const BusinessProfileScreen: React.FC<BusinessProfileScreenProps> = (props) => {
+  // Props
   const { shop } = props.route.params;
+  // State
   const [location, setLocation] = useState({
-    latitude: 43.0000004,
-    longitude: -81.1935947,
+    latitude: 42.9927566,
+    longitude: -81.2649877,
   });
   const {
     businessName,
@@ -41,6 +51,7 @@ const BusinessProfileScreen = (props) => {
     services,
   } = shop;
 
+  // Functions
   const renderMap = (location: LatLng) => {
     return (
       <MapView
@@ -64,7 +75,7 @@ const BusinessProfileScreen = (props) => {
     );
   };
 
-  const renderDay = (day: string, data, tabs = 2) => {
+  const renderDay = (day: string, data: any, tabs = 2) => {
     const { isHoliday, startTime, endTime } = data[day];
     const dayText = day.charAt(0).toUpperCase() + day.slice(1);
     const tabSpace = "\t".repeat(tabs);
@@ -75,6 +86,7 @@ const BusinessProfileScreen = (props) => {
     );
   };
 
+  // Render
   return (
     <AppContainer style={styles.mainContainer}>
       <AppHeader />
@@ -142,10 +154,15 @@ const BusinessProfileScreen = (props) => {
 
 export default BusinessProfileScreen;
 
+// Default Props
+BusinessProfileScreen.defaultProps = {
+  route: null,
+  navigation: null,
+};
+
+// Styles
 export const styles = StyleSheet.create({
   mainContainer: {
-    // flex: 1,
-    // alignItems: 'center',
     height: "100%",
     width: "100%",
     backgroundColor: Color.background,
@@ -156,7 +173,6 @@ export const styles = StyleSheet.create({
     height: "30%",
     alignItems: "center",
     justifyContent: "center",
-    // backgroundColor: Color.themeOrange,
   },
   logoImg: {
     width: "100%",
@@ -168,7 +184,6 @@ export const styles = StyleSheet.create({
     color: Color.primaryText,
   },
   titleView: {
-    // backgroundColor: Color.themeOrange,
     marginVertical: Responsive.verticalScale(10),
   },
   editTouch: {
@@ -212,7 +227,6 @@ export const styles = StyleSheet.create({
     width: "100%",
   },
   listItem: {
-    // alignItems:'center',
     justifyContent: "center",
     padding: "2%",
     marginVertical: 5,
@@ -226,7 +240,6 @@ export const styles = StyleSheet.create({
   },
   priceText: {
     fontSize: 16,
-    // fontWeight: '500',
     color: Color.regularText,
   },
   text: {

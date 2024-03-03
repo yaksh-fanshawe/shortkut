@@ -1,9 +1,18 @@
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from "react-native";
+// Library Imports
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 import React, { useState } from "react";
+// Component Imports
 import { AppHeader, AppTextInput } from "../../components";
 import { Color, Screen } from "../../utils";
-import { getLocationResults } from "../../utils/Data";
+import { getLocationResults, shops } from "../../utils/Data";
 
+// Constants
 const list = [
   { city: "London", province: "Ontario" },
   { city: "Kitchener", province: "Ontario" },
@@ -12,28 +21,35 @@ const list = [
   { city: "Toronto", province: "Ontario" },
 ];
 
+// Interface
 interface SearchScreenProps {
   selectedService: string;
+  route: any;
+  navigation: any;
 }
 
+// Component
 const SearchScreen: React.FC<SearchScreenProps> = (props) => {
-  const {selectedService} = props.route.params
-  const {navigation} = props
+  // Props
+  const { selectedService } = props.route.params;
+  const { navigation } = props;
+  // State
   const [location, setLocation] = useState("");
-  const [shopList, setShopList] = useState([])
+  const [shopList, setShopList] = useState(shops);
 
-  const onChangeLocationText = (text) => {
-    setLocation(text)
-    const tempList = getLocationResults(text)
-    setShopList(tempList)
-    // console.log(getLocationResults(text))
-  }
+  // Functions
+  const onChangeLocationText = (text: string) => {
+    setLocation(text);
+    const tempList = getLocationResults(text);
+    setShopList(tempList);
+  };
 
-  const onPressShop = (item) => {
+  const onPressShop = (item: any) => {
     // navigate to selected service
-    navigation.navigate(Screen.BusinessProfileScreen, {shop: item})
-  }
+    navigation.navigate(Screen.BusinessProfileScreen, { shop: item });
+  };
 
+  // Render
   return (
     <View style={styles.mainContainer}>
       <AppHeader />
@@ -47,15 +63,18 @@ const SearchScreen: React.FC<SearchScreenProps> = (props) => {
         />
       </View>
       <View style={styles.midView}>
-        <Text >Select Location</Text>
+        <Text>{"Select Location"}</Text>
         <FlatList
           data={shopList}
-          style={{ width: "100%" }}
-          renderItem={({ item, index }) => {
+          style={styles.flatListStyle}
+          renderItem={({ item }) => {
             return (
-              <TouchableOpacity style={styles.listItem} onPress={() => onPressShop(item)}>
+              <TouchableOpacity
+                style={styles.listItem}
+                onPress={() => onPressShop(item)}
+              >
                 <Text style={styles.listItemText}>{item.businessName}</Text>
-                <Text >{`${item?.city}, ${item?.province}`}</Text>
+                <Text>{`${item?.city}, ${item?.province}`}</Text>
               </TouchableOpacity>
             );
           }}
@@ -65,6 +84,14 @@ const SearchScreen: React.FC<SearchScreenProps> = (props) => {
   );
 };
 
+// Default Props
+SearchScreen.defaultProps = {
+  selectedService: "",
+  route: null,
+  navigation: null,
+};
+
+// Styles
 const styles = StyleSheet.create({
   mainContainer: {
     height: "100%",
@@ -73,7 +100,6 @@ const styles = StyleSheet.create({
   },
   topView: {
     width: "100%",
-    // height: "17%",
     alignItems: "center",
     padding: "2%",
     borderBottomWidth: 2,
@@ -84,21 +110,22 @@ const styles = StyleSheet.create({
     padding: "2%",
     width: "100%",
     height: "75%",
-    // backgroundColor: "red",
   },
   listItem: {
-    // alignItems:'center',
     justifyContent: "center",
     padding: "2%",
     marginVertical: 5,
     backgroundColor: Color.blueShadow,
-    borderRadius: 8
+    borderRadius: 8,
   },
-  listItemText:{
+  listItemText: {
     fontSize: 16,
-    fontWeight: '500',
-    color: Color.regularText
-  }
+    fontWeight: "500",
+    color: Color.regularText,
+  },
+  flatListStyle: {
+    width: "100%",
+  },
 });
 
 export default SearchScreen;
