@@ -4,6 +4,7 @@ const Screen = {
   BusinessProfileScreen: "BusinessProfileScreen",
   CalenderScreen: "CalenderScreen",
   PaymentSelectionScreen: "PaymentSelectionScreen",
+  AcknowledgementScreen: "AcknowledgementScreen",
 };
 
 export default Screen;

@@ -6,6 +6,7 @@ import LandingPage from "../screens/Home/landingPage";
 import SearchScreen from "../screens/Search Screen/SearchScreen";
 import BusinessProfileScreen from "../screens/BusinessProfileScreen/BusinessProfileScreen";
 import CalenderScreen from "../screens/CalenderScreen/CalenderScreen";
+import PaymentSelectionScreen from "../screens/PaymentSelectionScreen/PaymentSelectionScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +21,7 @@ const Route = () => {
           component={BusinessProfileScreen}
         />
         <Stack.Screen name={Screen.CalenderScreen} component={CalenderScreen} />
+        <Stack.Screen name={Screen.PaymentSelectionScreen} component={PaymentSelectionScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -17,10 +17,11 @@ import _ from "lodash";
 import moment from "moment";
 
 interface CalenderScreenProps {
-  navigation: any;
+  navigation: any
+  route : any
 }
 
-const CalenderScreen: React.FC<CalenderScreenProps> = ({ navigation }) => {
+const CalenderScreen: React.FC<CalenderScreenProps> = ({ navigation , route}) => {
   const [timeSlots, setTimeSlots] = useState([]);
   const [selectedDate, setSelectedDate] = useState(
     new Date().toISOString().split("T")[0]
@@ -61,6 +62,7 @@ const CalenderScreen: React.FC<CalenderScreenProps> = ({ navigation }) => {
     navigation.navigate(Screen.PaymentSelectionScreen, {
       selectedDate,
       selectedTime: time,
+      ...route.params
     });
   };
 
