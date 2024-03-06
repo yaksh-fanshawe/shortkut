@@ -7,7 +7,7 @@ import SearchScreen from "../screens/Search Screen/SearchScreen";
 import BusinessProfileScreen from "../screens/BusinessProfileScreen/BusinessProfileScreen";
 import CalenderScreen from "../screens/CalenderScreen/CalenderScreen";
 import PaymentSelectionScreen from "../screens/PaymentSelectionScreen/PaymentSelectionScreen";
-import AcknowledgementScreen from "../screens/Acknowledgement/AcknowledgementScreen";
+import AcknowledgementScreen from "../screens/Acknowledgement Screen/AcknowledgementScreen";
 
 const Stack = createNativeStackNavigator();
 
