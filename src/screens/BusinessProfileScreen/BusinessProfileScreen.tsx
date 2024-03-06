@@ -10,7 +10,7 @@ import {
 import React, { useState } from "react";
 import MapView, { LatLng, Marker } from "react-native-maps";
 // Component Imports
-import { Color, Responsive } from "../../utils";
+import { Color, Responsive, Screen } from "../../utils";
 import { AppHeader, AppContainer, AppButton } from "../../components";
 
 // Constants
@@ -52,6 +52,13 @@ const BusinessProfileScreen: React.FC<BusinessProfileScreenProps> = (props) => {
   } = shop;
 
   // Functions
+  const onSelectService = (item: any) => {
+    props.navigation.navigate(Screen.CalenderScreen, {
+      selectedService: item,
+      shop,
+    });
+  };
+
   const renderMap = (location: LatLng) => {
     return (
       <MapView
@@ -134,18 +141,19 @@ const BusinessProfileScreen: React.FC<BusinessProfileScreenProps> = (props) => {
             style={{ width: "100%" }}
             renderItem={({ item, index }) => {
               return (
-                <TouchableOpacity style={styles.listItem}>
+                <TouchableOpacity
+                  style={styles.listItem}
+                  onPress={() => onSelectService(item)}
+                >
                   <View style={styles.leftView}>
                     <Text
                       style={styles.listItemText}
                     >{`${item?.title} - ${item?.duration}min`}</Text>
-                    <Text
-                      style={styles.priceText}
-                    >{`Service Details`}</Text>
+                    <Text style={styles.priceText}>{`Service Details`}</Text>
                   </View>
-                  <TouchableOpacity style={styles.priceButton}>
+                  <View style={styles.priceButton}>
                     <Text style={styles.text}>{`$${item.price}`}</Text>
-                  </TouchableOpacity>
+                  </View>
                 </TouchableOpacity>
               );
             }}

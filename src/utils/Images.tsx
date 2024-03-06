@@ -1,5 +1,5 @@
 const Images = {
-    // logo: require('../assets/images/logo.png'),
+    back: require('../assets/Images/back.png'),
   }
   
   export default Images

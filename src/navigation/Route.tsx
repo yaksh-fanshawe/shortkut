@@ -5,6 +5,7 @@ import Screen from "../utils/Screens";
 import LandingPage from "../screens/Home/landingPage";
 import SearchScreen from "../screens/Search Screen/SearchScreen";
 import BusinessProfileScreen from "../screens/BusinessProfileScreen/BusinessProfileScreen";
+import CalenderScreen from "../screens/CalenderScreen/CalenderScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -14,7 +15,11 @@ const Route = () => {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name={Screen.LandingScreen} component={LandingPage} />
         <Stack.Screen name={Screen.SearchScreen} component={SearchScreen} />
-        <Stack.Screen name={Screen.BusinessProfileScreen} component={BusinessProfileScreen} />
+        <Stack.Screen
+          name={Screen.BusinessProfileScreen}
+          component={BusinessProfileScreen}
+        />
+        <Stack.Screen name={Screen.CalenderScreen} component={CalenderScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
