@@ -135,13 +135,17 @@ const BusinessProfileScreen: React.FC<BusinessProfileScreenProps> = (props) => {
             renderItem={({ item, index }) => {
               return (
                 <TouchableOpacity style={styles.listItem}>
-                  <Text style={styles.listItemText}>{item?.title}</Text>
-                  <Text
-                    style={styles.priceText}
-                  >{`Duration : ${item?.duration} minutes`}</Text>
-                  <Text
-                    style={styles.priceText}
-                  >{`Price : $ ${item?.price}`}</Text>
+                  <View style={styles.leftView}>
+                    <Text
+                      style={styles.listItemText}
+                    >{`${item?.title} - ${item?.duration}min`}</Text>
+                    <Text
+                      style={styles.priceText}
+                    >{`Service Details`}</Text>
+                  </View>
+                  <TouchableOpacity style={styles.priceButton}>
+                    <Text style={styles.text}>{`$${item.price}`}</Text>
+                  </TouchableOpacity>
                 </TouchableOpacity>
               );
             }}
@@ -228,10 +232,14 @@ export const styles = StyleSheet.create({
   },
   listItem: {
     justifyContent: "center",
+    flexDirection: "row",
     padding: "2%",
     marginVertical: 5,
     backgroundColor: Color.blueShadow,
     borderRadius: 8,
+  },
+  leftView: {
+    flex: 1,
   },
   listItemText: {
     fontSize: 18,
@@ -246,5 +254,12 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "600",
     color: Color.primaryText,
+  },
+  priceButton: {
+    padding: 10,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: Color.themeBlue,
+    backgroundColor: Color.background,
   },
 });
