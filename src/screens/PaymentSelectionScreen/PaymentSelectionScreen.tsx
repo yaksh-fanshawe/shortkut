@@ -40,7 +40,7 @@ const PaymentSelectionScreen: React.FC<PaymentSelectionScreenProps> = ({ navigat
 
     
         // Navigate to PaymentSelectionScreen with the selected date and time
-        // navigation.navigate(Screen.AcknowledgementScreen, {  });
+        navigation.navigate(Screen.AcknowledgementScreen, { ...route.params });
 
   };
 

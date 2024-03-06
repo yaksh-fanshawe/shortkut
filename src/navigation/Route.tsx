@@ -7,6 +7,7 @@ import SearchScreen from "../screens/Search Screen/SearchScreen";
 import BusinessProfileScreen from "../screens/BusinessProfileScreen/BusinessProfileScreen";
 import CalenderScreen from "../screens/CalenderScreen/CalenderScreen";
 import PaymentSelectionScreen from "../screens/PaymentSelectionScreen/PaymentSelectionScreen";
+import AcknowledgementScreen from "../screens/Acknowledgement/AcknowledgementScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,7 @@ const Route = () => {
         />
         <Stack.Screen name={Screen.CalenderScreen} component={CalenderScreen} />
         <Stack.Screen name={Screen.PaymentSelectionScreen} component={PaymentSelectionScreen} />
+        <Stack.Screen name={Screen.AcknowledgementScreen} component={AcknowledgementScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
