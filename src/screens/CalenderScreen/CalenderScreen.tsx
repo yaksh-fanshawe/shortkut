@@ -29,9 +29,11 @@ const CalenderScreen: React.FC<CalenderScreenProps> = ({ navigation , route}) =>
 
   useEffect(() => {
     const generateTimeSlots = () => {
-      const currentTime = moment().startOf('minute');
+      const currentDate = new Date().toISOString().split("T")[0]
+      const isCurrentDateSelected = new Date(selectedDate) < new Date(currentDate)
+      const currentTime =  moment().startOf( isCurrentDateSelected ? 'minute' : "day");
       const endOfDay = moment().endOf('day');
-      const timeSlotDuration = 30; // in minutes
+      const timeSlotDuration = 15; // in minutes
 
       // Find the next 30-minute interval
       const remainder = timeSlotDuration - (currentTime.minute() % timeSlotDuration);
@@ -51,7 +53,7 @@ const CalenderScreen: React.FC<CalenderScreenProps> = ({ navigation , route}) =>
     };
 
     generateTimeSlots();
-  }, []);
+  }, [selectedDate]);
 
   const onPressBack = () => {
     navigation.goBack();
