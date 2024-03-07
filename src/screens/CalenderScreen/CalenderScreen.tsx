@@ -160,10 +160,10 @@ const CalenderScreen: React.FC<CalenderScreenProps> = (props) => {
         Time_Slot_Split_Duration;
       currentTime = currentTime.minute(roundedMinutes);
 
-      const startTime = currentTime.format("HH:mm A");
+      const startTime = currentTime.format("hh:mm A");
       const endTime = currentTime
         .add(Time_Slot_Split_Duration, "minutes")
-        .format("HH:mm A");
+        .format("hh:mm A");
       slots.push({ startTime, endTime });
 
       // currentTime.add(Time_Slot_Split_Duration, "minutes");
