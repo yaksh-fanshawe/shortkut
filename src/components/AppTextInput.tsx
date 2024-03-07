@@ -17,7 +17,7 @@ const AppTextInput: React.FC<AppTextInputProps> = ({
 }) => {
   return (
     <TextInput
-      style={styles.textField}
+      style={editable ? styles.textFieldActive : styles.textField}
       placeholder={placeholder}
       placeholderTextColor={Color.placeholder}
       onChangeText={editable ? onChangeText : () => console.log("")}
@@ -51,5 +51,22 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     fontSize: 16,
     color: Color.primaryText,
+  },
+  textFieldActive: {
+    backgroundColor: Color.white,
+    height: 50,
+    borderRadius: 10,
+    marginVertical: "1%",
+    width: "100%",
+    shadowColor: Color.lightGray2,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 1,
+    shadowRadius: 4,
+    elevation: 4,
+    paddingLeft: 20,
+    fontSize: 16,
+    color: Color.primaryText,
+    borderColor: Color.themeBlue,
+    borderWidth: 1,
   },
 });

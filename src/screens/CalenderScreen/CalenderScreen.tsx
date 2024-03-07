@@ -12,7 +12,7 @@ import { Calendar } from "react-native-calendars";
 import _ from "lodash";
 import moment from "moment";
 // Component Imports
-import { Color, Screen } from "../../utils";
+import { Color, Responsive, Screen } from "../../utils";
 import { AppHeader } from "../../components";
 
 // Constants
@@ -204,11 +204,15 @@ const CalenderScreen: React.FC<CalenderScreenProps> = (props) => {
           onDayPress={(day) => setSelectedDate(day.dateString)}
           markedDates={{ [selectedDate]: { selected: true } }}
           minDate={`${moment()}`}
+          style={styles.calendar}
         />
         <View style={styles.selectedDateContainer}>
-          <Text style={styles.selectedDateText}>{`Selected Date: ${moment(
-            selectedDate
-          ).format("MMM DD, YYYY")}`}</Text>
+          <Text style={styles.titleText}>
+            Selected Date:
+            <Text style={styles.selectedDateText}>{`  ${moment(
+              selectedDate
+            ).format("MMM DD, YYYY")}`}</Text>
+          </Text>
           <View style={styles.timeSlotsContainer}>{renderTimeSlots()}</View>
         </View>
       </ScrollView>
@@ -228,7 +232,7 @@ CalenderScreen.defaultProps = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Color.white,
+    backgroundColor: Color.background,
   },
   scrollContent: {
     flexGrow: 1,
@@ -244,8 +248,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   selectedDateText: {
-    fontSize: 16,
-    marginBottom: 10,
+    fontWeight: "400",
   },
   timeSlotsContainer: {
     flexDirection: "row",
@@ -253,9 +256,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   timeSlotButton: {
-    backgroundColor: "transparent",
-    borderWidth: 1,
-    borderColor: "black",
+    backgroundColor: Color.blueShadow,
     borderRadius: 5,
     paddingVertical: 10,
     paddingHorizontal: 5,
@@ -265,5 +266,16 @@ const styles = StyleSheet.create({
   },
   timeSlotText: {
     fontSize: 16,
+  },
+  titleText: {
+    fontSize: Responsive.scale(18),
+    fontWeight: "bold",
+    color: Color.black,
+    marginVertical: Responsive.verticalScale(10),
+  },
+  calendar: {
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: Color.themeBlue,
   },
 });

@@ -47,8 +47,8 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
-    fontWeight: "600",
-    color: Color.primaryText,
+    fontWeight: "bold",
+    color: Color.themeBlue,
     flex: 1,
     textAlign: "center",
   },
@@ -61,5 +61,6 @@ const styles = StyleSheet.create({
   backImg: {
     width: "100%",
     height: "100%",
+    tintColor: Color.themeBlue,
   },
 });

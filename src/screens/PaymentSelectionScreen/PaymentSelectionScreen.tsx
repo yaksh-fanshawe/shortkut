@@ -61,7 +61,7 @@ const PaymentSelectionScreen: React.FC<PaymentSelectionScreenProps> = ({ navigat
             {tipPercentages.map((item, index) => (
               <TouchableOpacity
                 key={index}
-                style={[styles.tipButton, {backgroundColor: tipPercentage === item ? Color.blueCard : Color.blueShadow}]}
+                style={[styles.tipButton, {borderColor: tipPercentage === item ? Color.themeBlue : Color.blueShadow}]}
                 onPress={() => setTipPercentage(item)}
               >
                 <Text style={styles.tipButtonText}>{`${item}%`}</Text>
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: Color.background,
   },
   timingContainer: {
     marginBottom: 20,
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly'
   },
   tipButton: {
-    backgroundColor: '#DDDDDD',
+    backgroundColor: Color.blueShadow,
     paddingVertical: 10,
     paddingHorizontal: 20,
     alignItems:'center',
@@ -130,6 +130,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     marginRight: 10,
     width: '45%', // Adjusted width for the 3x2 grid
+    borderWidth: 1,
   },
   tipButtonText: {
     fontSize: 16,
@@ -181,7 +182,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   bookWithCardButton: {
-    backgroundColor: Color.blueCard,
+    backgroundColor: Color.themeBlue,
     borderRadius: 10,
     padding: 15,
     alignItems: 'center',

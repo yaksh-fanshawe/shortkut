@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
-import { Screen } from '../../utils'; 
+import { Color, Screen } from '../../utils'; 
 import { AppHeader } from '../../components';
 
 interface AcknowledgementScreenProps {
@@ -18,7 +18,7 @@ const AcknowledgementScreen: React.FC<AcknowledgementScreenProps> = ({navigation
       <AppHeader isBackButton onPressBack={onPressBack} />
       <View style={styles.container}>
         <View style={styles.rectangularContainer}>
-          <Text style={styles.title}>Appointment reserved</Text>
+          <Text style={styles.title}>Appointment Reserved</Text>
           <View style={styles.row}>
             <Text style={styles.label}>Confirmation code:</Text>
             <Text style={styles.value}>A23ZDC</Text>
@@ -64,10 +64,13 @@ const AcknowledgementScreen: React.FC<AcknowledgementScreenProps> = ({navigation
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
+    backgroundColor: Color.background,
   },
   rectangularContainer: {
     backgroundColor: '#FFFFFF',
     borderRadius: 10,
+    borderWidth: 1,
+    borderColor: Color.themeBlue,
     padding: 20,
   },
   container: {
@@ -85,13 +88,14 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   label: {
-    flex: 1,
+    flex: 2,
     fontSize: 16,
     fontWeight: 'bold',
   },
   value: {
-    flex: 2,
+    flex: 3,
     fontSize: 16,
+    marginLeft: 10,
   },
   button: {
     backgroundColor: '#4CAF50',

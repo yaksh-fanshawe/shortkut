@@ -48,10 +48,10 @@ const SearchScreen: React.FC<SearchScreenProps> = (props) => {
     // navigate to selected service
     navigation.navigate(Screen.BusinessProfileScreen, { shop: item });
   };
-  
+
   const onPressBack = () => {
     navigation.goBack();
-  }
+  };
 
   // Render
   return (
@@ -101,13 +101,13 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
     alignItems: "center",
+    backgroundColor: Color.background,
   },
   topView: {
     width: "100%",
     alignItems: "center",
     padding: "2%",
     borderBottomWidth: 2,
-    backgroundColor: Color.background,
   },
   midView: {
     padding: "2%",
@@ -129,12 +129,12 @@ const styles = StyleSheet.create({
   flatListStyle: {
     width: "100%",
   },
-  titleText:{
+  titleText: {
     fontSize: Responsive.scale(18),
     fontWeight: "bold",
     color: Color.black,
     marginVertical: Responsive.verticalScale(10),
-  }
+  },
 });
 
 export default SearchScreen;
