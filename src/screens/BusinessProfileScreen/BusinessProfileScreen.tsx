@@ -36,7 +36,8 @@ interface BusinessProfileScreenProps {
 
 const BusinessProfileScreen: React.FC<BusinessProfileScreenProps> = (props) => {
   // Props
-  const { shop } = props.route.params;
+  const {navigation, route} = props;
+  const { shop } = route.params;
   // State
   const [location, setLocation] = useState({
     latitude: 42.9927566,
@@ -53,7 +54,7 @@ const BusinessProfileScreen: React.FC<BusinessProfileScreenProps> = (props) => {
 
   // Functions
   const onSelectService = (item: any) => {
-    props.navigation.navigate(Screen.CalenderScreen, {
+    navigation.navigate(Screen.CalenderScreen, {
       selectedService: item,
       shop,
     });
@@ -93,10 +94,14 @@ const BusinessProfileScreen: React.FC<BusinessProfileScreenProps> = (props) => {
     );
   };
 
+  const onPressBack = () => {
+    navigation.goBack();
+  };
+
   // Render
   return (
     <AppContainer style={styles.mainContainer}>
-      <AppHeader />
+      <AppHeader isBackButton onPressBack={onPressBack} />
       {/* <View style={styles.profileView}>
         <Image
           source={{ uri: photoURL }}
@@ -134,8 +139,8 @@ const BusinessProfileScreen: React.FC<BusinessProfileScreenProps> = (props) => {
           </View> */}
           {/* <AppButton text={"Log Out"} onPress={onPressLogOut} /> */}
         </ScrollView>
-        <Text style={styles.priceText}>{`Select Services`}</Text>
-        <View style={{ height: "60%", marginTop: 5 }}>
+        <Text style={styles.selectServicesText}>{`Select Services`}</Text>
+        <View>
           <FlatList
             data={services}
             style={{ width: "100%" }}
@@ -149,10 +154,10 @@ const BusinessProfileScreen: React.FC<BusinessProfileScreenProps> = (props) => {
                     <Text
                       style={styles.listItemText}
                     >{`${item?.title} - ${item?.duration}min`}</Text>
-                    <Text style={styles.priceText}>{`Service Details`}</Text>
+                    <Text style={styles.detailText}>{`Service Details`}</Text>
                   </View>
                   <View style={styles.priceButton}>
-                    <Text style={styles.text}>{`$${item.price}`}</Text>
+                    <Text style={styles.priceText}>{`$${item.price}`}</Text>
                   </View>
                 </TouchableOpacity>
               );
@@ -254,11 +259,12 @@ export const styles = StyleSheet.create({
     fontWeight: "500",
     color: Color.primaryText,
   },
-  priceText: {
+  detailText: {
     fontSize: 16,
-    color: Color.regularText,
+    color: Color.blueCard,
+    textDecorationLine: "underline",
   },
-  text: {
+  priceText: {
     fontSize: 20,
     fontWeight: "600",
     color: Color.primaryText,
@@ -270,4 +276,10 @@ export const styles = StyleSheet.create({
     borderColor: Color.themeBlue,
     backgroundColor: Color.background,
   },
+  selectServicesText: {
+    fontSize: Responsive.scale(18),
+    fontWeight: "bold",
+    color: Color.black,
+    marginVertical: Responsive.verticalScale(10),
+  }
 });

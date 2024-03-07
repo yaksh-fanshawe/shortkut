@@ -8,8 +8,8 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 // Component Imports
-import { AppHeader, AppTextInput } from "../../components";
-import { Color, Screen } from "../../utils";
+import { AppContainer, AppHeader, AppTextInput } from "../../components";
+import { Color, Responsive, Screen } from "../../utils";
 import { getLocationResults, shops } from "../../utils/Data";
 
 // Constants
@@ -48,11 +48,15 @@ const SearchScreen: React.FC<SearchScreenProps> = (props) => {
     // navigate to selected service
     navigation.navigate(Screen.BusinessProfileScreen, { shop: item });
   };
+  
+  const onPressBack = () => {
+    navigation.goBack();
+  }
 
   // Render
   return (
-    <View style={styles.mainContainer}>
-      <AppHeader />
+    <AppContainer style={styles.mainContainer}>
+      <AppHeader isBackButton onPressBack={onPressBack} />
       <View style={styles.topView}>
         <AppTextInput value={selectedService} editable={false} />
         <AppTextInput
@@ -63,7 +67,7 @@ const SearchScreen: React.FC<SearchScreenProps> = (props) => {
         />
       </View>
       <View style={styles.midView}>
-        <Text>{"Select Location"}</Text>
+        <Text style={styles.titleText}>{"Select Location"}</Text>
         <FlatList
           data={shopList}
           style={styles.flatListStyle}
@@ -80,7 +84,7 @@ const SearchScreen: React.FC<SearchScreenProps> = (props) => {
           }}
         />
       </View>
-    </View>
+    </AppContainer>
   );
 };
 
@@ -106,7 +110,6 @@ const styles = StyleSheet.create({
     backgroundColor: Color.background,
   },
   midView: {
-    alignItems: "center",
     padding: "2%",
     width: "100%",
     height: "75%",
@@ -126,6 +129,12 @@ const styles = StyleSheet.create({
   flatListStyle: {
     width: "100%",
   },
+  titleText:{
+    fontSize: Responsive.scale(18),
+    fontWeight: "bold",
+    color: Color.black,
+    marginVertical: Responsive.verticalScale(10),
+  }
 });
 
 export default SearchScreen;

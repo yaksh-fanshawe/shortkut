@@ -9,7 +9,7 @@ import {
 import React, { useState } from "react";
 import * as _ from "lodash";
 // Component Imports
-import { AppTextInput, AppHeader } from "../../components";
+import { AppTextInput, AppHeader, AppContainer } from "../../components";
 import { Color, Screen } from "../../utils";
 
 // Constants
@@ -52,9 +52,12 @@ const LandingPage: React.FC<LandingPageProps> = ({ navigation }) => {
   };
 
   return (
-    <View>
+    <AppContainer>
       <AppHeader />
       <View style={styles.mainView}>
+        <Text style={{ fontSize: 20, fontWeight: "500", marginBottom: 10 }}>
+          Services
+        </Text>
         <AppTextInput
           value={search}
           placeholder={"Search"}
@@ -73,7 +76,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ navigation }) => {
           }}
         />
       </View>
-    </View>
+    </AppContainer>
   );
 };
 

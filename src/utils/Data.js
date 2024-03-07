@@ -1,10 +1,11 @@
-import _ from  'lodash'
+import _ from "lodash";
 
 export const getLocationResults = (text) => {
   return _.filter(shops, (item) => {
-    return _.includes(item.city, text)
-  })
+    return _.includes(item.city, text);
+  });
 };
+
 export const shops = [
   {
     businessName: "Level Up",
@@ -27,6 +28,11 @@ export const shops = [
         title: "Beards",
         duration: 10,
         price: 15,
+      },
+      {
+        title: "Long Hair",
+        duration: 25,
+        price: 25,
       },
     ],
   },
@@ -51,6 +57,11 @@ export const shops = [
         title: "Beards",
         duration: 10,
         price: 15,
+      },
+      {
+        title: "Long Hair",
+        duration: 25,
+        price: 25,
       },
     ],
   },
@@ -130,7 +141,7 @@ export const shops = [
 
 const Data = {
   getLocationResults,
-  shops
-}
+  shops,
+};
 
-export default Data
+export default Data;
