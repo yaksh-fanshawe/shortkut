@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
   timeSlotsContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "flex-start",
+    justifyContent: 'center',
   },
   timeSlotButton: {
     backgroundColor: Color.blueShadow,
@@ -262,7 +262,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
     margin: 5,
     alignItems: "center",
-    width: 100, // Set a fixed width for the buttons
+    width: Responsive.scale(100), // Set a fixed width for the buttons
   },
   timeSlotText: {
     fontSize: 16,

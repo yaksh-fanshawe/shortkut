@@ -6,11 +6,12 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import React, { useState } from "react";
 import MapView, { LatLng, Marker } from "react-native-maps";
 // Component Imports
-import { Color, Responsive, Screen } from "../../utils";
+import { Color, CommonStyles, Responsive, Screen } from "../../utils";
 import { AppHeader, AppContainer, AppButton } from "../../components";
 
 // Constants
@@ -36,7 +37,7 @@ interface BusinessProfileScreenProps {
 
 const BusinessProfileScreen: React.FC<BusinessProfileScreenProps> = (props) => {
   // Props
-  const {navigation, route} = props;
+  const { navigation, route } = props;
   const { shop } = route.params;
   // State
   const [location, setLocation] = useState({
@@ -60,6 +61,15 @@ const BusinessProfileScreen: React.FC<BusinessProfileScreenProps> = (props) => {
     });
   };
 
+  const onPressBack = () => {
+    navigation.goBack();
+  };
+
+  const onPressEdit = () => {
+    console.log("Edit");
+  };
+
+  // Views
   const renderMap = (location: LatLng) => {
     return (
       <MapView
@@ -94,79 +104,153 @@ const BusinessProfileScreen: React.FC<BusinessProfileScreenProps> = (props) => {
     );
   };
 
-  const onPressBack = () => {
-    navigation.goBack();
+  const renderTopView = () => {
+    return (
+      <View>
+        <View style={styles.profileView}>
+          <Image
+            source={{ uri: photoURL }}
+            style={styles.logoImg}
+            resizeMode={"contain"}
+          />
+        </View>
+        <View style={styles.titleView}>
+          <Text style={styles.titleText}>{businessName}</Text>
+          <AppButton
+            text={"Edit"}
+            onPress={onPressEdit}
+            style={styles.editTouch}
+          />
+        </View>
+      </View>
+    );
+  };
+
+  const renderMapView = () => {
+    return (
+      <View style={styles.addressView}>
+        <Text style={styles.addressTitleText}>{"Address"}</Text>
+        <Text
+          style={styles.addressText}
+        >{`${businessAddress}, ${city}, ${province}`}</Text>
+        {renderMap(location)}
+      </View>
+    );
+  };
+
+  const renderServiceList = () => {
+    return (
+      <View style={styles.serviceView}>
+        <Text style={styles.selectServicesText}>{`Select Services`}</Text>
+        <FlatList
+          data={services}
+          renderItem={({ item, index }) => {
+            return (
+              <TouchableOpacity
+                style={styles.listItem}
+                onPress={() => onSelectService(item)}
+              >
+                <View style={styles.leftView}>
+                  <Text
+                    style={styles.listItemText}
+                  >{`${item?.title} - ${item?.duration}min`}</Text>
+                  <Text style={styles.detailText}>{`Service Details`}</Text>
+                </View>
+                <View style={styles.priceButton}>
+                  <Text style={styles.priceText}>{`$${item.price}`}</Text>
+                </View>
+              </TouchableOpacity>
+            );
+          }}
+        />
+      </View>
+    );
   };
 
   // Render
   return (
     <AppContainer style={styles.mainContainer}>
       <AppHeader isBackButton onPressBack={onPressBack} />
-      {/* <View style={styles.profileView}>
-        <Image
-          source={{ uri: photoURL }}
-          style={styles.logoImg}
-          resizeMode={"contain"}
-        />
-      </View> */}
-      <View style={styles.titleView}>
-        <Text style={styles.title}>{businessName}</Text>
-        {/* <AppButton
-          text={"Edit"}
-          onPress={onPressEdit}
-          style={styles.editTouch}
-        /> */}
-      </View>
-      <View>
+      <View style={CommonStyles.flex}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.addressView}>
-            <Text style={styles.addressTitleText}>{"Address"}</Text>
-            <Text
-              style={styles.addressText}
-            >{`${businessAddress}, ${city}, ${province}`}</Text>
-            {renderMap(location)}
-          </View>
-          {/* <View style={styles.addressView}>
-            <Text style={styles.addressTitleText}>{"Business Hours"}</Text>
-
-            {renderDay("sunday", schedule)}
-            {renderDay("monday", schedule)}
-            {renderDay("tuesday", schedule)}
-            {renderDay("wednesday", schedule, 1)}
-            {renderDay("thursday", schedule)}
-            {renderDay("friday", schedule, 3)}
-            {renderDay("saturday", schedule)}
-          </View> */}
-          {/* <AppButton text={"Log Out"} onPress={onPressLogOut} /> */}
+          {renderTopView()}
+          {renderMapView()}
+          {renderServiceList()}
         </ScrollView>
-        <Text style={styles.selectServicesText}>{`Select Services`}</Text>
-        <View>
-          <FlatList
-            data={services}
-            style={{ width: "100%" }}
-            renderItem={({ item, index }) => {
-              return (
-                <TouchableOpacity
-                  style={styles.listItem}
-                  onPress={() => onSelectService(item)}
-                >
-                  <View style={styles.leftView}>
-                    <Text
-                      style={styles.listItemText}
-                    >{`${item?.title} - ${item?.duration}min`}</Text>
-                    <Text style={styles.detailText}>{`Service Details`}</Text>
-                  </View>
-                  <View style={styles.priceButton}>
-                    <Text style={styles.priceText}>{`$${item.price}`}</Text>
-                  </View>
-                </TouchableOpacity>
-              );
-            }}
-          />
-        </View>
       </View>
     </AppContainer>
   );
+
+  // return (
+  //   <AppContainer style={styles.mainContainer}>
+  //     <AppHeader isBackButton onPressBack={onPressBack} />
+  //     <View style={{ flex: 1 }}>
+  //       <ScrollView showsVerticalScrollIndicator={false}>
+  //         <View style={styles.container}>
+  //           <View style={styles.profileView}>
+  //             <Image
+  //               source={{ uri: photoURL }}
+  //               style={styles.logoImg}
+  //               resizeMode={"contain"}
+  //             />
+  //           </View>
+  //           <View style={styles.titleView}>
+  //             <Text style={styles.title}>{businessName}</Text>
+  //             <AppButton
+  //               text={"Edit"}
+  //               // onPress={onPressEdit}
+  //               style={styles.editTouch}
+  //             />
+  //           </View>
+  //           <View style={styles.addressView}>
+  //             <Text style={styles.addressTitleText}>{"Address"}</Text>
+  //             <Text
+  //               style={styles.addressText}
+  //             >{`${businessAddress}, ${city}, ${province}`}</Text>
+  //             {renderMap(location)}
+  //           </View>
+  //           {/* <View style={styles.addressView}>
+  //           <Text style={styles.addressTitleText}>{"Business Hours"}</Text>
+
+  //           {renderDay("sunday", schedule)}
+  //           {renderDay("monday", schedule)}
+  //           {renderDay("tuesday", schedule)}
+  //           {renderDay("wednesday", schedule, 1)}
+  //           {renderDay("thursday", schedule)}
+  //           {renderDay("friday", schedule, 3)}
+  //           {renderDay("saturday", schedule)}
+  //         </View> */}
+  //           {/* <AppButton text={"Log Out"} onPress={onPressLogOut} /> */}
+  //         </View>
+  //         <Text style={styles.selectServicesText}>{`Select Services`}</Text>
+  //         <View style={{ height: 300 }}>
+  //           <FlatList
+  //             data={services}
+  //             // style={{ width: "100%" }}
+  //             renderItem={({ item, index }) => {
+  //               return (
+  //                 <TouchableOpacity
+  //                   style={styles.listItem}
+  //                   onPress={() => onSelectService(item)}
+  //                 >
+  //                   <View style={styles.leftView}>
+  //                     <Text
+  //                       style={styles.listItemText}
+  //                     >{`${item?.title} - ${item?.duration}min`}</Text>
+  //                     <Text style={styles.detailText}>{`Service Details`}</Text>
+  //                   </View>
+  //                   <View style={styles.priceButton}>
+  //                     <Text style={styles.priceText}>{`$${item.price}`}</Text>
+  //                   </View>
+  //                 </TouchableOpacity>
+  //               );
+  //             }}
+  //           />
+  //         </View>
+  //       </ScrollView>
+  //     </View>
+  //   </AppContainer>
+  // );
 };
 
 export default BusinessProfileScreen;
@@ -183,45 +267,46 @@ export const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
     backgroundColor: Color.background,
+  },
+  container: {
     paddingHorizontal: Responsive.scale(10),
   },
   profileView: {
     width: "100%",
-    height: "30%",
+    aspectRatio: 2,
+    padding: Responsive.scale(5),
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: Color.themeBlue,
   },
   logoImg: {
     width: "100%",
     height: "100%",
   },
-  title: {
-    fontSize: 24,
+  titleText: {
+    fontSize: Responsive.font(7),
     fontWeight: "bold",
     color: Color.primaryText,
+    flex: 1,
   },
   titleView: {
-    marginVertical: Responsive.verticalScale(10),
+    paddingHorizontal: Responsive.scale(10),
+    flexDirection: "row",
+    alignItems: "center",
   },
   editTouch: {
-    position: "absolute",
-    right: 0,
-    top: 0,
-    overflow: "hidden",
     paddingHorizontal: Responsive.scale(10),
     paddingVertical: Responsive.verticalScale(5),
-    marginVertical: 0,
   },
   addressView: {
-    marginTop: Responsive.verticalScale(10),
+    margin: Responsive.verticalScale(10),
     borderColor: Color.themeBlue,
     borderWidth: 1,
-    marginVertical: Responsive.verticalScale(10),
     padding: Responsive.scale(5),
     borderRadius: 10,
   },
   addressTitleText: {
-    fontSize: Responsive.scale(18),
+    fontSize: Responsive.font(5),
     fontWeight: "bold",
     color: Color.black,
     marginBottom: Responsive.verticalScale(10),
@@ -242,6 +327,10 @@ export const styles = StyleSheet.create({
   mapStyle: {
     height: 200,
     width: "100%",
+  },
+  serviceView: {
+    height: Responsive.verticalScale(300),
+    paddingHorizontal: Responsive.scale(10),
   },
   listItem: {
     justifyContent: "center",
@@ -281,5 +370,5 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     color: Color.black,
     marginVertical: Responsive.verticalScale(10),
-  }
+  },
 });
