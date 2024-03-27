@@ -4,6 +4,8 @@ const Screen = {
   BusinessStack: 'BusinessStack',
   LoginScreen: 'LoginScreen',
   RegistrationScreen: 'RegistrationScreen',
+  FirstScreen: 'FirstScreen',
+  BusinessRegistrationScreen: 'BusinessRegistrationScreen',
   LandingScreen: "LandingScreen",
   SearchScreen: "SearchScreen",
   BusinessProfileScreen: "BusinessProfileScreen",
