@@ -1,4 +1,12 @@
-import { Image, StyleSheet, Text, TouchableOpacity, TouchableOpacityProps, View } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  TouchableOpacityProps,
+  ImageProps,
+  View,
+} from "react-native";
 import React from "react";
 import { Color, Images, Responsive } from "../utils";
 
@@ -8,23 +16,25 @@ interface AppHeaderProps {
 }
 
 const AppHeader: React.FC<AppHeaderProps> = ({ isBackButton, onPressBack }) => {
-  const renderBackButton = () => {
+  const renderButton = ({ source, onPress }) => {
     return (
-      <TouchableOpacity style={styles.backTouch} onPress={onPressBack}>
-        <Image
-          source={Images.back}
-          style={styles.backImg}
-          resizeMode={"contain"}
-        />
+      <TouchableOpacity style={styles.backTouch} onPress={onPress}>
+        <Image source={source} style={styles.backImg} resizeMode={"contain"} />
       </TouchableOpacity>
     );
   };
 
   return (
     <View style={styles.mainContainer}>
-      {isBackButton && renderBackButton()}
+      {isBackButton ? (
+        renderButton({ source: Images.back, onPress: onPressBack })
+      ) : (
+        <View style={styles.backTouch} />
+      )}
       <Text style={styles.text}>{"ShortKut"}</Text>
-      {isBackButton && <View style={styles.backTouch} />}
+      {isBackButton
+        ? renderButton({ source: Images.profile, onPress: onPressBack })
+        : renderButton({ source: Images.login, onPress: onPressBack })}
     </View>
   );
 };
