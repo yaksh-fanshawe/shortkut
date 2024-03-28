@@ -1,27 +1,27 @@
 
 export interface PersonalDetails {
-    email?: String | null
-    firstName?: String | null
-    lastName?: String | null
-    dob?: String | null
-    gender?: String | null
-    phone?: String | null
-    photoUrl?: String | null
+    email: string | null
+    firstName: string | null
+    lastName: string | null
+    dob: string | null
+    gender: string | null
+    phone: string | null
+    photoUrl: string | null
 }
 
 export interface Location {
-    address1?: String | null
-    address2?: String | null
-    city?: String | null
-    state?: String | null
-    country?: String | null
-    pinCode?: String | null
-    geoLocation?: GeoLocation | null
+    address1: string | null
+    address2: string | null
+    city: string | null
+    state: string | null
+    country: string | null
+    pinCode: string | null
+    geoLocation: GeoLocation | null
 }
 
 export interface GeoLocation {
-    lat?: Number | null
-    lng?: Number | null
+    lat: number | null
+    lng: number | null
 }
 
 export interface Slot {
